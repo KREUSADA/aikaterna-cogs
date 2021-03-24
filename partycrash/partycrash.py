@@ -36,7 +36,8 @@ class PartyCrash(commands.Cog):
                 msg = f"Invite(s) for **{guild.name}**:"
                 for url in invites:
                     msg += f"\n{url}"
-                await ctx.send(msg)
+                for page in pagify(msg, delims=["\n"]):
+                    await ctx.send(msg)
             else:
                 await ctx.send("Alright then.")
         except asyncio.TimeoutError:
